@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#ffd23f">
+<title>Explorá San Juan · Estudio, Trabajo, Arte y Deporte</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,800;9..144,900&family=Figtree:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#141414;
+  --bg:#faf9f5;
+  --sun:#ffd23f;
+  --uni:#ff8f6b;
+  --tec:#5fd9b3;
+  --oficio:#6cc3ff;
+  --emprender:#c3a6ff;
+  --arte:#ff92cc;
+  --deporte:#a3e635;
+  --mu:#555;
+  --card-bg:#ffffff;
+}
+*{box-sizing:border-box;margin:0;-webkit-tap-highlight-color:transparent}
+body{background:var(--bg);color:var(--ink);font:17px/1.5 'Figtree',system-ui,sans-serif;padding-bottom:40px}
+button,input,a{font:inherit;color:inherit}
+button{cursor:pointer;background:none;border:0}
+:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+h1,h2,h3,h4{font-family:'Fraunces',Georgia,serif;font-weight:900;line-height:1.05}
+
+/* TOP NAVBAR */
+.top{position:sticky;top:0;z-index:15;background:var(--bg);border-bottom:3px solid var(--ink);padding:10px 16px;display:flex;justify-content:space-between;align-items:center}
+.logo{font-family:'Fraunces',Georgia,serif;font-weight:900;font-size:1.25rem;display:flex;align-items:center;gap:6px}
+.logo span{background:var(--sun);padding:2px 8px;border-radius:8px;border:2px solid var(--ink);font-size:0.85rem}
+.bag{border:2.5px solid var(--ink);border-radius:999px;padding:6px 14px;font-weight:800;background:var(--sun);min-height:44px;box-shadow:2px 2px 0 var(--ink);display:flex;align-items:center;gap:6px;transition:transform 0.1s}
+.bag:active{transform:translate(2px,2px);box-shadow:none}
+
+/* CONTAINER */
+.wrap{max-width:860px;margin:0 auto;padding:0 16px}
+
+/* HERO SECTION */
+.hero{text-align:center;background:var(--sun);border-bottom:3px solid var(--ink);padding:32px 16px 28px;position:relative;overflow:hidden}
+.hero::after{content:'';position:absolute;bottom:-10px;right:-10px;width:100px;height:100px;background:rgba(255,255,255,0.2);border-radius:50%;pointer-events:none}
+.hero h1{font-size:clamp(2.2rem,8.5vw,3.8rem);letter-spacing:-.02em;margin-bottom:8px}
+.hero p{margin:8px auto 20px;max-width:48ch;font-weight:600;font-size:1.05rem;color:#222}
+.search-box{max-width:620px;margin:0 auto;text-align:left}
+.search{display:flex;align-items:center;gap:10px;background:#fff;border:3px solid var(--ink);border-radius:16px;box-shadow:5px 5px 0 var(--ink);padding:4px 16px}
+.search input{flex:1;min-width:0;border:0;background:none;font:inherit;padding:12px 0;outline:0;font-weight:600;font-size:1.05rem}
+
+/* SECTIONS & HEADINGS */
+h2{font-size:1.5rem;margin:32px 0 6px;display:flex;align-items:center;gap:8px}
+.hint{color:var(--mu);font-size:.95rem;margin-bottom:14px;font-weight:600}
+
+/* CAMINOS / VIAS GRID */
+.vias{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.via{display:flex;align-items:center;gap:12px;text-align:left;border:3px solid var(--ink);border-radius:16px;padding:12px 14px;min-height:76px;box-shadow:4px 4px 0 var(--ink);transition:transform .12s,box-shadow .12s;user-select:none}
+.via .e{font-size:2rem;line-height:1}
+.via b{display:block;line-height:1.15;font-size:1rem}
+.via small{font-size:.82rem;font-weight:600;opacity:0.85;display:block;margin-top:2px}
+.via .n{margin-left:auto;font-weight:900;font-size:1.25rem;font-family:'Fraunces',serif;background:#fff;border:2px solid var(--ink);border-radius:10px;padding:2px 8px}
+.via[aria-pressed=true]{transform:translate(3px,3px);box-shadow:1px 1px 0 var(--ink);outline:3px solid var(--ink);outline-offset:-6px}
+
+/* SCROLL RAILS / CHIPS */
+.rail{display:flex;gap:8px;overflow-x:auto;padding:4px 16px 14px;margin:0 -16px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.rail::-webkit-scrollbar{display:none}
+.chip{flex:none;border:2.5px solid var(--ink);border-radius:999px;padding:8px 16px;font-weight:700;background:#fff;min-height:44px;white-space:nowrap;box-shadow:2px 2px 0 var(--ink);transition:all 0.1s}
+.chip:active{transform:translate(2px,2px);box-shadow:none}
+.chip[aria-pressed=true]{background:var(--ink);color:#fff;box-shadow:none}
+
+/* SEGMENTED CONTROL */
+.seg-group{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
+.seg{display:inline-flex;border:2.5px solid var(--ink);border-radius:999px;background:#fff;box-shadow:2px 2px 0 var(--ink);overflow:hidden}
+.seg button{padding:8px 14px;font-weight:700;min-height:42px;font-size:0.9rem}
+.seg button+button{border-left:2.5px solid var(--ink)}
+.seg button[aria-pressed=true]{background:var(--ink);color:#fff}
+
+/* BAR & COUNTER */
+.bar{display:flex;justify-content:space-between;align-items:baseline;margin:32px 0 14px;flex-wrap:wrap;gap:8px}
+.bar h2{margin:0}
+.clr{font-weight:800;text-decoration:underline;padding:8px 12px;min-height:44px;color:var(--ink);border:2px dashed var(--ink);border-radius:10px;background:#fff}
+
+/* CARDS LIST */
+.list{display:grid;gap:14px}
+.card-item{position:relative}
+.card{position:relative;display:block;width:100%;text-align:left;background:var(--card-bg);border:3px solid var(--ink);border-radius:16px;padding:16px 60px 16px 20px;box-shadow:4px 4px 0 var(--ink);overflow:hidden;transition:transform 0.12s,box-shadow 0.12s}
+.card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:10px;background:var(--c)}
+.card:active{transform:translate(3px,3px);box-shadow:1px 1px 0 var(--ink)}
+.card h3{font-size:1.18rem;margin-bottom:4px;padding-right:10px}
+.card .inst{color:var(--mu);font-size:.93rem;font-weight:700;margin-bottom:6px}
+.card .desc-preview{font-size:.9rem;color:#333;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;margin-bottom:8px}
+.pills{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.pill{font-size:.78rem;font-weight:800;border:2px solid var(--ink);border-radius:999px;padding:2px 10px;background:#f0f0f0}
+.pill.new{background:var(--sun)}
+.pill.pub{background:#e0f2fe}
+.pill.priv{background:#fce7f3}
+
+.fv{position:absolute;top:10px;right:10px;width:44px;height:44px;font-size:1.4rem;z-index:2;display:flex;align-items:center;justify-content:center;border-radius:50%;background:#fff;border:2px solid var(--ink);box-shadow:2px 2px 0 var(--ink)}
+.fv:active{transform:translate(2px,2px);box-shadow:none}
+
+.empty{border:3px dashed var(--ink);border-radius:16px;padding:40px 20px;text-align:center;background:#fff}
+.empty h3{font-size:1.3rem;margin-bottom:8px}
+
+.note{font-size:.85rem;color:var(--mu);margin:36px 0 20px;padding:14px;border:2px solid var(--ink);border-radius:12px;background:#fff}
+
+/* FULLSCREEN MODAL / DETAIL PAGE */
+.page{position:fixed;inset:0;background:var(--bg);z-index:30;overflow:auto;transform:translateX(100%);visibility:hidden;transition:transform .22s cubic-bezier(0.16, 1, 0.3, 1),visibility .22s}
+.page.on{transform:none;visibility:visible}
+.ph{border-bottom:3px solid var(--ink);padding:20px 16px 24px;background:var(--c)}
+.back{border:2.5px solid var(--ink);background:#fff;border-radius:999px;padding:8px 18px;font-weight:800;min-height:44px;margin-bottom:16px;box-shadow:3px 3px 0 var(--ink);display:inline-flex;align-items:center;gap:6px}
+.back:active{transform:translate(2px,2px);box-shadow:none}
+.ph h2{font-size:clamp(1.7rem,7vw,2.5rem);margin:8px 0 6px}
+.ph .subinst{font-size:1.1rem;font-weight:800;opacity:0.9}
+
+.pb{padding:16px 0 120px}
+.f-box{background:#fff;border:2.5px solid var(--ink);border-radius:14px;padding:16px;margin-top:16px;box-shadow:3px 3px 0 var(--ink)}
+.f-box h4{font-family:'Fraunces',serif;font-size:1.1rem;margin-bottom:6px;color:var(--ink);display:flex;align-items:center;gap:6px}
+.f-box p{font-size:0.98rem;color:#222;line-height:1.5}
+
+.ul{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.ul span{border:2px solid var(--ink);border-radius:10px;padding:4px 12px;font-size:.9rem;font-weight:700;background:#fff}
+
+/* STICKY BOTTOM BAR IN MODAL */
+.cta{position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:3px solid var(--ink);padding:12px 16px calc(12px + env(safe-area-inset-bottom,0px));display:flex;gap:10px;z-index:35;box-shadow:0 -4px 12px rgba(0,0,0,0.08)}
+.cta a,.cta button{flex:1;text-align:center;text-decoration:none;border:3px solid var(--ink);border-radius:14px;padding:12px 8px;font-weight:800;min-height:50px;color:var(--ink);display:flex;align-items:center;justify-content:center;gap:6px;font-size:1rem}
+.cta a{background:var(--sun);box-shadow:3px 3px 0 var(--ink)}
+.cta button{background:#fff;box-shadow:3px 3px 0 var(--ink)}
+.cta a:active,.cta button:active{transform:translate(2px,2px);box-shadow:none}
+
+.share-btn{display:flex;align-items:center;justify-content:center;gap:8px;margin:20px 0 10px;width:100%;text-align:center;border:3px solid var(--ink);border-radius:14px;padding:14px;font-weight:800;background:var(--tec);text-decoration:none;color:var(--ink);box-shadow:4px 4px 0 var(--ink)}
+.share-btn:active{transform:translate(2px,2px);box-shadow:none}
+
+@media(min-width:640px){
+  .vias{grid-template-columns:repeat(3,1fr)}
+}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<div class="top">
+  <div class="logo">Explorá SJ <span>San Juan</span></div>
+  <button class="bag" id="bag" aria-label="Ver mi mochila">🎒 Mi mochila <span id="fc">0</span></button>
+</div>
+
+<header class="hero">
+  <div class="wrap">
+    <h1>Armá tu camino después de la escuela</h1>
+    <p>Conocé todas las opciones en San Juan: carreras universitarias, tecnicaturas, oficios, trabajo, arte y deporte. Guardá las que te gusten.</p>
+    <div class="search-box">
+      <label class="search">
+        <span aria-hidden="true" style="font-size:1.2rem">🔎</span>
+        <input id="q" type="search" placeholder="Buscá: 'Enfermería', 'Abogacía', 'Arquitectura', 'Electricidad', 'Música'..." aria-label="Buscar opciones">
+      </label>
+    </div>
+  </div>
+</header>
+
+<main class="wrap" id="main">
+  <h2>Elegí un camino</h2>
+  <p class="hint">Tocá para filtrar por tipo de alternativa. Podés desactivarlo tocando de nuevo.</p>
+  <div class="vias" id="vias"></div>
+
+  <h2>¿Qué temas te copan?</h2>
+  <p class="hint">Elegí una o varias áreas de interés.</p>
+  <div class="rail" id="areas"></div>
+
+  <h2>Filtros adicionales</h2>
+  <div class="seg-group">
+    <div class="rail" id="extra" style="margin:0;padding:0 0 8px"></div>
+  </div>
+
+  <div class="bar">
+    <h2 id="count">Opciones disponibles</h2>
+    <button class="clr" id="clr">🔄 Limpiar todos los filtros</button>
+  </div>
+
+  <div class="list" id="list"></div>
+
+  <p class="note">💡 <b>Nota informativa:</b> Catálogo completo para el Taller de Orientación Vocacional 2027. Relevado de fuentes oficiales del Gobierno de San Juan, UNSJ, UCCuyo, Univ. de Congreso, Siglo 21, Institutos de Formación Superior y Centros de Capacitación Laboral. La disponibilidad de cupos, inscripciones y fechas debe confirmarse siempre en el sitio oficial de cada institución.</p>
+</main>
+
+<div class="page" id="pg" role="dialog" aria-modal="true"></div>
+
+<script>
+// CATEGORÍAS PRINCIPALES (VÍAS DE FUTURO)
+const VIAS = [
+  ["uni", "🎓", "Universidades", "Carreras largas de grado", "var(--uni)"],
+  ["tec", "🛠️", "Tecnicaturas", "Carreras cortas e Institutos", "var(--tec)"],
+  ["oficio", "⚡", "Oficios y Cursos", "Capacitación laboral rápida", "var(--oficio)"],
+  ["emprender", "💡", "Empleo y Emprender", "Primer trabajo y proyectos", "var(--emprender)"],
+  ["arte", "🎨", "Arte y Cultura", "Música, teatro, danza y talleres", "var(--arte)"],
+  ["deporte", "⚽", "Deporte y Salud", "Becas, tecnicaturas y formación", "var(--deporte)"]
+];
+
+// ÁREAS TEMÁTICAS
+const AREAS = {
+  salud: "🩺 Salud y Bienestar",
+  tec: "💻 Tecnología y Software",
+  arte: "🎨 Arte, Diseño y Cultura",
+  deporte: "⚽ Deporte y Actividad Física",
+  mineria: "⛏️ Minería, Industria y Energía",
+  agro: "🌱 Agro, Naturaleza y Ambiente",
+  social: "🤝 Ciencias Sociales y Educación",
+  eco: "📈 Economía, Negocios y Derecho",
+  estetica: "✂️ Estética y Cuidado Personal",
+  mecanica: "🔧 Mecánica y Mantenimiento"
+};
+
+// LINKS OFICIALES CONSTANTES
+const U_UNSJ = "https://www.unsj.edu.ar";
+const U_UCCUYO = "https://uccuyo.edu.ar/";
+const U_UCONGRESO = "https://www.ucongreso.edu.ar/sedes-y-extensiones-aulicas/localizacion-san-juan/";
+const U_SIGLO21 = "https://inscribite.21.edu.ar/cau-san-juan";
+const U_EDU_SJ = "https://educacion.sanjuan.gob.ar";
+const U_GOB_SJ = "https://www.sanjuan.gob.ar";
+const U_DEPORTES = "https://deportes.sanjuan.gob.ar";
+const U_TEATRO_B = "https://www.teatrodelbicentenariosanjuan.org";
+
+// BASE DE DATOS MASIVA DE SAN JUAN
+const D = [];
+const E = (n, v, i, t, d, x, c, a, u, g, l, nw) => D.push({
+  n, v: v.split(" "), i, t, d, x, c, a: a.split(" "), u, g, l: l ? l.split("|") : [], nw: !!nw
+});
+
+// ==========================================
+// 1. UNIVERSIDAD NACIONAL DE SAN JUAN (UNSJ)
+// ==========================================
+E("Ingenierías en Minas, Metalurgia, Civil y Agrimensura", "uni", "UNSJ · Facultad de Ingeniería", "Título de Grado: Ingeniero/a", "5 a 6 años", 
+  "Carreras estratégicas en San Juan. Vas a aprender a planificar la extracción responsable de minerales, construir grandes infraestructuras en zonas de alta sismicidad y ordenar la cartografía y catastro del territorio.", 
+  "Empresas mineras nacionales e internacionales, obras públicas, viales, consultoría de ingeniería y organismos estatales.", 
+  "mineria tec", "https://www.fi.unsj.edu.ar", 0, "Ingeniería de Minas|Ingeniería en Metalurgia Extractiva|Ingeniería Civil|Ingeniería en Agrimensura");
+
+E("Ingenierías Eléctrica, Electromecánica, Electrónica, Mecánica, Industrial y Bioingeniería", "uni", "UNSJ · Facultad de Ingeniería", "Título de Grado: Ingeniero/a", "5 a 6 años", 
+  "Formación de excelencia en automatización, robótica, redes eléctricas, procesos industriales sostenibles y la Bioingeniería (tecnología aplicada a equipos médicos e infraestructura hospitalaria).", 
+  "Parques fotovoltaicos, plantas industriales, hospitales y clínicas, minería, desarrollo de tecnología biomédica.", 
+  "tec mineria salud mecanica", "https://www.fi.unsj.edu.ar", 0, "Ingeniería en Energía Eléctrica|Ingeniería Electromecánica|Ingeniería Electrónica|Ingeniería Mecánica|Ingeniería Industrial|Bioingeniería");
+
+E("Ingeniería Agronómica, Química y en Alimentos", "uni", "UNSJ · Facultad de Ingeniería", "Título de Grado: Ingeniero/a", "5 años", 
+  "Enfocadas en la producción agropecuaria, el procesamiento de alimentos, la enología industrial y los procesos químicos sustentables, claves en la provincia de San Juan.", 
+  "Bodegas, olivares, industrias alimenticias, laboratorios de control de calidad, campos de cultivo e instituciones de investigación (INTA).", 
+  "agro tec", "https://www.fi.unsj.edu.ar", 0, "Ingeniería Agronómica|Ingeniería Química|Ingeniería en Alimentos|Tecnicatura en Agroindustrias");
+
+E("Licenciaturas y Tecnicaturas en Informática y Programación", "uni tec", "UNSJ · Fac. de Ciencias Exactas, Físicas y Naturales", "Grado y Pregrado", "Lic: 5 años · Tec: 2.5 a 3 años", 
+  "Aprenderás desarrollo de software, inteligencia artificial, arquitectura de sistemas y desarrollo de aplicaciones web de última generación. Incluye opciones cortas con rápida salida laboral.", 
+  "Empresas informáticas locales y globales, startups, trabajo remoto internacional (freelance), áreas de IT en empresas.", 
+  "tec", "https://exactas.unsj.edu.ar/carreras/", 0, "Licenciatura en Sistemas de Información|Tecnicatura Universitaria en Programación Web");
+
+E("Geología, Geofísica, Astronomía y Física", "uni", "UNSJ · Fac. de Ciencias Exactas, Físicas y Naturales", "Título de Grado: Licenciado/a", "5 años", 
+  "Estudio científico de la corteza terrestre, placas tectónicas, fenómenos sísmicos, recursos hídricos subterráneos y la exploración del universo mediante observatorios astronómicos locales.", 
+  "Exploración de minería y petróleo, estudio de riesgo sísmico y suelos, Observatorio CESCO, CONICET e investigación internacional.", 
+  "mineria tec agro", "https://exactas.unsj.edu.ar/carreras/", 0, "Licenciatura en Ciencias Geológicas|Licenciatura en Geofísica|Licenciatura en Astronomía|Licenciatura en Física|Tecnicatura en Exploración Geológica (Valles Sanjuaninos)");
+
+E("Licenciatura en Biología", "uni", "UNSJ · Fac. de Ciencias Exactas, Físicas y Naturales", "Licenciado/a en Biología", "5 años", 
+  "Estudio de los ecosistemas de cordillera y monte, flora y fauna nativas, biotecnología y conservación de la biodiversidad en San Juan.", 
+  "Áreas naturales protegidas, laboratorios de biotecnología, gestión ambiental en minería e industrias, CONICET.", 
+  "agro salud", "https://exactas.unsj.edu.ar/carreras/", 0, "Licenciatura en Biología");
+
+E("Arquitectura, Diseño Industrial y Diseño Gráfico", "uni", "UNSJ · Facultad de Arquitectura, Urbanismo y Diseño (FAUD)", "Grado: Arquitecto/a · Diseñador/a", "5 años", 
+  "Aprenderás a idear y proyectar desde viviendas y espacios urbanos hasta productos industriales, mobiliario, packaging y sistemas de comunicación visual e identidades de marca.", 
+  "Estudios de arquitectura, constructoras, agencias de publicidad y diseño, industria de packaging, freelancers.", 
+  "arte tec", "https://faud.unsj.edu.ar", 0, "Arquitectura|Diseño Industrial|Diseño Gráfico");
+
+E("Higiene y Seguridad Laboral (Educación a Distancia)", "uni tec", "UNSJ · FAUD", "Licenciatura y Tecnicatura Universitaria", "Lic: 4 años · Tec: 2.5 años", 
+  "Carrera enfocada en la prevención de riesgos del trabajo, protección de la salud de los trabajadores y normas ambientales en obras, industrias y minería.", 
+  "Servicios de ART, minería, constructoras, hospitales, grandes comercios y consultoría independiente.", 
+  "mineria tec salud", "https://faud.unsj.edu.ar", 0, "Licenciatura en Higiene y Seguridad Laboral|Tecnicatura Universitaria en Higiene y Seguridad en la Construcción", 1);
+
+E("Música, Artes Visuales y Teatro", "uni arte", "UNSJ · Fac. de Filosofía, Humanidades y Artes", "Profesorados y Licenciaturas", "4 a 5 años", 
+  "Formación artística profesional en interpretación instrumental, canto, pintura, escultura, grabado, actuación y dirección teatral, con sólida base pedagógica.", 
+  "Docencia en escuelas, orquestas profesionales (Orquesta Sinfónica de San Juan), elencos teatrales, galerías de arte y gestión cultural.", 
+  "arte social", "https://ffha.unsj.edu.ar", 0, "Licenciatura en Artes Visuales|Licenciatura en Educación Musical|Profesorado en Artes Visuales|Profesorado de Teatro|Profesorado Universitario de Educación Musical|Profesorado Universitario de Música|Tecnicatura Superior en Interpretación Musical|Intérprete Musical|Profesorado de Música con orientación en Música Popular (Valles Sanjuaninos)");
+
+E("Letras, Inglés, Historia, Filosofía, Geografía, Educación y Matemática", "uni", "UNSJ · Fac. de Filosofía, Humanidades y Artes", "Profesorados y Licenciaturas", "4 a 5 años", 
+  "Carreras de desarrollo crítico, investigación histórica, literatura, traducción e idiomas, geografía y herramientas de Sistemas de Información Geográfica (SIG).", 
+  "Escuelas e institutos de idiomas, editorial, traducción profesional, ordenamiento territorial, centros de investigación.", 
+  "social arte tec", "https://ffha.unsj.edu.ar", 0, "Licenciatura en Letras|Licenciatura en Inglés|Licenciatura en Historia|Licenciatura en Filosofía|Licenciatura en Geografía|Licenciatura en Ciencias de la Educación|Licenciatura en Matemática|Profesorado de Letras|Profesorado de Inglés|Profesorado Universitario en Inglés|Profesorado de Historia|Profesorado en Filosofía|Profesorado en Geografía|Profesorado en Ciencias de la Educación|Profesorado de Matemática|Profesorado de Física|Profesorado de Química|Profesorado de Tecnología");
+
+E("Turismo y Sistemas de Información Geográfica", "uni tec", "UNSJ · Fac. de Filosofía, Humanidades y Artes", "Licenciatura y Tecnicaturas", "Tec: 3 años · Lic: 5 años", 
+  "Formación para potenciar a San Juan como polo turístico, gestión de hoteles, reservas naturales y mapeo satelital para el análisis del territorio.", 
+  "Agencias de viajes, hoteles, organismos de turismo provinciales y municipales, consultoras ambientales.", 
+  "social agro eco", "https://ffha.unsj.edu.ar", 0, "Licenciatura en Turismo|Tecnicatura Universitaria en Turismo|Tecnicatura Universitaria en Sistemas de Información Geográfica");
+
+E("Ciencias Económicas y Ciencias Jurídicas (UNSJ)", "uni", "UNSJ · Facultad de Ciencias Sociales", "Títulos de Grado", "4 a 5 años", 
+  "Estudio de las ciencias contables, la economía política, la administración de empresas y el marco legal e institucional de la República Argentina.", 
+  "Poder Judicial, estudios contables y jurídicos, empresas privadas, administración pública de la provincia.", 
+  "eco social", "https://facso.unsj.edu.ar", 0, "Contador Público|Licenciatura en Administración|Abogacía|Licenciatura en Gestión Universitaria");
+
+E("Comunicación Social, Sociología, Trabajo Social y Ciencias Políticas", "uni", "UNSJ · Facultad de Ciencias Sociales", "Licenciaturas y Profesorados", "4 a 5 años", 
+  "Comprender, analizar e intervenir en la realidad social, los medios de comunicación masivos y digitales, las políticas públicas y los derechos humanos.", 
+  "Medios digitales, prensa institucional, ONGs, diagnóstico social, consultorías de mercado y política, docencia.", 
+  "social arte", "https://facso.unsj.edu.ar", 0, "Licenciatura en Comunicación Social|Licenciatura en Sociología|Licenciatura en Trabajo Social|Licenciatura en Ciencias Políticas");
+
+E("Enfermería, Obstetricia y Asistencia Dental", "uni tec", "UNSJ · Escuela Universitaria de Ciencias de la Salud (Albardón)", "Grado y Pregrado", "2 a 5 años", 
+  "Formación de profesionales de la salud humana con intensas prácticas de campo en el Hospital Rawson, Marcial Quiroga y centros de salud departamentales.", 
+  "Hospitales públicos, clínicas privadas, atención domiciliaria, prevención comunitaria, consultorios odontológicos.", 
+  "salud", "https://www.eucs.unsj.edu.ar", 0, "Licenciatura en Enfermería|Obstetricia|Asistente Dental", 1);
+
+// ==========================================
+// 2. UNIVERSIDAD CATÓLICA DE CUYO (UCCUYO)
+// ==========================================
+E("Medicina y Ciencias de la Salud (UCCuyo)", "uni", "Universidad Católica de Cuyo · Fac. de Ciencias Médicas / Cs. Químicas y Tecnológicas", "Médico/a · Licenciaturas", "4 a 6 años", 
+  "Formación integral médica y sanitaria con simuladores clínicos, laboratorios equipados y convenios de residencia en los principales centros médicos.", 
+  "Hospitales, sanatorios, centros de rehabilitación, consultorio privado, investigación clínica.", 
+  "salud", U_UCCUYO, 1, "Medicina|Enfermería|Licenciatura en Kinesiología y Fisiatría|Licenciatura en Nutrición|Licenciatura en Terapia Ocupacional|Tecnicatura en Análisis Clínicos|Tecnicatura Universitaria en Podología|Farmacia|Licenciatura en Bioquímica");
+
+E("Abogacía, Notariado y Corredor Inmobiliario", "uni tec", "Universidad Católica de Cuyo · Fac. de Derecho y Ciencias Sociales", "Abogado/a · Notario/a · Martillero/a", "2.5 a 5 años", 
+  "Estudio profundo del derecho civil, penal, laboral y comercial, con opciones cortas para tasaciones, remates y negocios inmobiliarios.", 
+  "Poder judicial, escribanías, agencias inmobiliarias, asesoría legal corporativa.", 
+  "eco social", U_UCCUYO, 1, "Abogacía|Notariado|Corredor de Comercio, Inmobiliario y Martillero Público");
+
+E("Ciencias Económicas y Empresariales (UCCuyo)", "uni", "Universidad Católica de Cuyo · Fac. de Ciencias Económicas y Empresariales", "Contador/a · Licenciaturas", "4 a 5 años", 
+  "Gestión estratégica de negocios, finanzas avanzadas, comercio internacional para exportación de productos sanjuaninos y hotelería.", 
+  "Empresas privadas, bancos, comercio exterior (bodegas/minería), hoteles y emprendimientos.", 
+  "eco", U_UCCUYO, 1, "Contador Público|Licenciatura en Economía|Licenciatura en Administración de Empresas|Licenciatura en Comercio Internacional|Licenciatura en Hotelería y Turismo");
+
+E("Psicología, Recursos Humanos, Educación y Seguridad", "uni", "Universidad Católica de Cuyo · Fac. de Filosofía y Humanidades / Escuela de Seguridad / IFD Santa María", "Licenciaturas y Profesorados", "4 a 5 años", 
+  "Formación en salud mental clínica, educacional y laboral, junto con carreras de gestión educativa y seguridad ciudadana.", 
+  "Consultorios psicológicos, escuelas, gabinetes psicopedagógicos, recursos humanos en empresas, fuerzas de seguridad.", 
+  "social salud", U_UCCUYO, 1, "Licenciatura en Psicología|Licenciatura en Recursos Humanos|Acompañante Terapéutico|Licenciatura en Psicopedagogía|Profesorados|Educación Física|Licenciatura en Gestión de Instituciones Educativas|Licenciatura en Educación Inclusiva|Seguridad Ciudadana|Seguridad Penitenciaria");
+
+E("Desarrollo de Software, Alimentos, Gastronomía y Ambiente", "uni tec", "Universidad Católica de Cuyo · Fac. Cs. Químicas y Tecnológicas", "Técnico/a Universitario/a", "2.5 a 3 años", 
+  "Carreras de pregrado rápidas enfocadas en la programación informática y el control de calidad biotecnológico de alimentos.", 
+  "Empresas de software, laboratorios bromatológicos, plantas agroindustriales.", 
+  "tec agro", U_UCCUYO, 1, "Técnico Universitario en Desarrollo de Software|Tecnicatura en Control de Calidad de Alimentos|Tecnología de los Alimentos|Enología|Sommelier|Gastronomía|Tecnicatura Universitaria en Higiene y Seguridad en el Trabajo|Gestión Ambiental");
+
+// ==========================================
+// 3. UNIVERSIDAD DE CONGRESO & SIGLO 21
+// ==========================================
+E("Salud, Kinesiología y Radiología (Univ. de Congreso)", "uni tec", "Universidad de Congreso · Sede San Juan", "Licenciaturas y Tecnicaturas", "2 a 4 años", 
+  "Propuestas académicas orientadas a la salud física, diagnóstico por imágenes y salud mental con amplia inserción regional.", 
+  "Centros de radiología, clínicas traumatológicas, equipos deportivos, hospitales.", 
+  "salud deporte", U_UCONGRESO, 1, "Licenciatura en Kinesiología|Radiología (Producción de Bioimágenes)|Instrumentación Quirúrgica|Enfermería|Acompañante Terapéutico|Psicología");
+
+E("Gestión de Recursos Hídricos y Ambiente (U. Congreso)", "uni", "Universidad de Congreso · Sede San Juan", "Licenciatura en Gestión de Recursos Hídricos", "4 años", 
+  "Carrera innovadora en San Juan para gestionar el recurso agua en contexto de sequía, irrigación agrícola e hídrica en la minería.", 
+  "Departamento Hidráulico, empresas mineras, fincas agrícolas, municipios, consultorías ambientales.", 
+  "agro mineria tec", U_UCONGRESO, 1, "Licenciatura en Gestión de Recursos Hídricos|Licenciatura en Gestión Ambiental", 1);
+
+E("Abogacía, Administración, Educación y Relaciones Internacionales (U. de Congreso)", "uni", "Universidad de Congreso · Sede San Juan", "Abogacía y Licenciaturas", "Según la carrera", "Propuestas de derecho, gestión y educación: desde la abogacía y la administración hasta recursos humanos, psicopedagogía y relaciones internacionales.", "Estudios jurídicos, empresas, áreas de recursos humanos, escuelas, gabinetes psicopedagógicos, organismos y comercio exterior.", "eco social", U_UCONGRESO, 1, "Abogacía|Licenciatura en Administración|Licenciatura en Recursos Humanos|Licenciatura en Ciencias de la Educación|Licenciatura en Psicopedagogía|Licenciatura en Relaciones Internacionales");
+
+E("Carreras Online y Híbridas (Universidad Siglo 21)", "uni tec", "Universidad Siglo 21 · CAUs San Juan", "Grado y Tecnicaturas", "2 a 4 años", 
+  "Plataforma adaptable de estudio online con sedes presenciales (CAU) en Capital, Rawson, Caucete, Jáchal y Rivadavia.", 
+  "Trabajo remoto, gestión corporativa, administración de software, análisis de datos, marketing digital.", 
+  "tec eco social", U_SIGLO21, 1, "Abogacía|Contador Público|Licenciatura en Administración|Licenciatura en Comercialización (Marketing)|Licenciatura en Recursos Humanos|Licenciatura en Relaciones Internacionales|Licenciatura en Comercio Internacional|Licenciatura en Logística Global|Licenciatura en Gestión Turística|Licenciatura en Diseño Gráfico|Licenciatura en Diseño y Animación Digital|Licenciatura en Administración Agraria|Licenciatura en Educación|Licenciatura en Informática|Escribanía|Relaciones Públicas e Institucionales|Ciencia de Datos|Ciberseguridad|Tecnicatura en Higiene y Seguridad Laboral|Tecnicatura en Martillero y Corredor Público|Tecnicatura en Gestión Contable|Tecnicatura en Dirección de Equipos de Venta|Tecnicatura en Gestión Administrativa de Servicios de Salud");
+
+// ==========================================
+// 4. TERCIARIOS E INSTITUTOS SUPERIORES (ISFD / ISTP / ACC)
+// ==========================================
+E("Tecnicatura Superior en Administración de Almacenes y Control de Stock (ACC)", "tec", "Instituto Superior Técnico Público de San Juan / Colegio Superior Nº 1", "Técnico/a Superior en ACC", "3 años", 
+  "Capacitación profesional en gestión logística, cadena de suministro, control informático de depósitos, inventarios y organización de stock para la industria, el comercio y la minería sanjuanina.", 
+  "Centros logísticos, depósitos de empresas mineras, supermercados, cadenas mayoristas, empresas de transporte e industrias.", 
+  "eco tec mineria", U_EDU_SJ, 0, "Gestión de Inventarios|Logística y Cadena de Suministro|Sistemas informáticos aplicados a Stock|Seguridad en Almacenes", 1);
+
+E("Tecnicatura Superior en Electromecánica Industrial", "tec", "Instituto Superior de Formación Técnica (IST) / San Martín", "Técnico/a Superior Electromecánico", "3 años", 
+  "Carrera técnica enfática en mantenimiento preventivo y correctivo de maquinaria, instalación de sistemas mecánicos, motores eléctricos, automatización y mantenimiento industrial.", 
+  "Talleres industriales, plantas embotelladoras, fábricas, minería, parques fotovoltaicos y empresas de mantenimiento.", 
+  "tec mecanica mineria", U_EDU_SJ, 0, "Mantenimiento Mecánico|Instalaciones Eléctricas Industriales|Automatización PLC|Sistemas Hidráulicos y Neumáticos");
+
+E("Tecnicaturas en Enología, Sommelier y Alimentos", "tec", "ISTPEIF · Escuela Fontana (Desamparados)", "Técnico/a Superior (Estatal Gratuito)", "3 años", 
+  "Instituto público de referencia provincial. Formación técnica práctica en bodega, elaboración de vinos, aceites de oliva, cata y sommelierie.", 
+  "Bodegas boutique e industriales, restoranes, olivareras, laboratorios enológicos, turismo gastronómico.", 
+  "agro eco", U_EDU_SJ, 0, "Tecnicatura Superior en Enología|Tecnicatura Superior en Sommelier|Tecnicatura en Tecnología de Alimentos", 1);
+
+E("Profesorados de Educación Física y Deportes (ISEF)", "uni tec deporte", "Instituto Superior de Educación Física (ISEF)", "Profesor/a de Educación Física", "4 años", 
+  "Formación docente en preparación física, entrenamiento deportivo, recreación, vida en la naturaleza y anatomía deportiva.", 
+  "Escuelas primarias y secundarias, gimnasios, clubes deportivos, colonias de verano, entrenamiento personalizado.", 
+  "deporte salud social", U_EDU_SJ, 0, "Profesorado de Educación Física");
+
+E("Tecnicatura Superior en Seguridad Pública (Policía de San Juan)", "tec emprender", "Escuela de Cadetes Antonino Aberastain", "Técnico/a Superior en Seguridad Pública", "3 años", 
+  "Formación teórica y física para incorporarse como Oficial de la Policía de San Juan. Requiere examen de ingreso físico y psicotécnico.", 
+  "Policía de San Juan, seguridad pública provincial, prevención comunitaria.", 
+  "social deporte", U_GOB_SJ, 0, "Tecnicatura Superior en Seguridad Pública", 1);
+
+E("Institutos de Formación Docente (ISFD Normal, San Buenaventura, etc.)", "tec", "Ministerio de Educación · ISFD Provinciales", "Profesor/a Educación Inicial / Primaria / Especial", "4 años", 
+  "Carreras docentes públicas y gratuitas en institutos distribuidos en Capital, Caucete, Jáchal, Calingasta, Valle Fértil y Pocito.", 
+  "Escuelas de nivel inicial, primarias, educación especial, gabinetes multidisciplinarios.", 
+  "social", U_EDU_SJ, 0, "Profesorado de Educación Inicial|Profesorado de Educación Primaria|Profesorado de Educación Especial");
+
+E("Delegación Valles Sanjuaninos (UNSJ): carreras en el interior", "uni tec", "UNSJ · Delegación Valles Sanjuaninos (Jáchal)", "Técnico/a Superior / Universitario", "2.5 a 3 años", 
+  "Carreras de la UNSJ que se dictan en el interior de la provincia (sede en San José de Jáchal y departamentos de los valles) para estudiar cerca de tu departamento.", 
+  "Empresas proveedoras mineras, agroindustria local, servicios técnicos municipales.", 
+  "mineria tec agro mecanica", U_EDU_SJ, 0, "Tecnicatura en Operaciones de Minas|Tecnicatura en Procesamiento de Minerales|Tecnicatura en Exploración Geológica|Tecnicatura en Diseño de Indumentaria y Textil|Tecnicatura en Higiene y Seguridad Laboral en la Industria de la Construcción|Tecnicatura en Turismo|Tecnicatura Universitaria en Inglés para los Servicios y la Industria|Tecnicatura Universitaria en Mantenimiento de Maquinaria Pesada|Tecnicatura Universitaria en Industria Alimentaria|Licenciatura en Enfermería|Profesorado de Música con orientación en Música Popular");
+
+E("Tecnicatura Superior en Preceptoría y Gestión Escolar", "tec", "Instituto Superior Santa María / San Agustín", "Técnico/a Superior en Preceptoría", "2 a 3 años", 
+  "Capacitación enfocada en el acompañamiento pedagógico, mediación escolar, administración de instituciones educativas y uso de sistemas informáticos de gestión.", 
+  "Escuelas secundarias, colegios privados, institutos terciarios y centros educativos.", 
+  "social tec", U_EDU_SJ, 1, "Gestión de la Convivencia Escolar|Legislación Educativa|Administración Escolar");
+
+// ==========================================
+// 5. OFICIOS, CAPACITACIÓN Y TRABAJO RÁPIDO
+// ==========================================
+E("Peluquería Unissex, Barbería y Estética Capilar", "oficio emprender", "Escuelas de Capacitación Laboral de San Juan", "Certificación Oficial en Peluquería y Estética", "5 a 9 meses", 
+  "Curso técnico y práctico sobre corte masculino y femenino, peinados, colorimetría, alizados, barbería, perfilado de barba y tratamientos de restauración capilar.", 
+  "Peluquerías, barberías, salones de belleza, atención a domicilio y apertura de emprendimiento propio.", 
+  "estetica oficio emprender", U_EDU_SJ, 0, "Peluquería Integral|Barbería Profesional|Colorimetría Avanzada|Tratamientos Capilares");
+
+E("Cosmetología, Maquillaje Profesional y Estética Corporal", "oficio emprender", "Escuelas de Capacitación Laboral de San Juan", "Certificado de Capacitación en Estética", "4 a 8 meses", 
+  "Formación en cuidado cutáneo, maquillaje para eventos, depilación, perfilado de cejas, lifting de pestañas, manicuría y belleza de manos y pies.", 
+  "Centros de estética, gabinetes propios, estudio de maquillaje, hoteles y servicios de estética a domicilio.", 
+  "estetica oficio emprender", U_EDU_SJ, 0, "Cosmetología Básica|Maquillaje Profesional|Belleza de Manos y Pies|Depilación e Imagen");
+
+E("Mecánica Automotriz y Diagnóstico por Escáner", "oficio tec", "Escuelas de Capacitación Laboral / Centros Misioneros", "Certificado en Mecánica Integral de Automotores", "6 a 9 meses", 
+  "Aprendizaje integral del funcionamiento de motores nafteros y diésel, sistemas de freno, suspensión, dirección, electricidad del automóvil e inyección electrónica.", 
+  "Talleres mecánicos, concesionarias, empresas de transporte, servicios de auxilio y taller propio.", 
+  "mecanica oficio tec", U_EDU_SJ, 0, "Mecánica Ligera|Inyección Electrónica|Frenos y Suspensión|Electricidad del Automóvil");
+
+E("Mecánica y Electricidad de Motocicletas", "oficio emprender", "Centros de Formación Laboral San Juan", "Certificación Técnica en Mecánica de Motos", "4 a 6 meses", 
+  "Formación práctica en reparación de motores de 2 y 4 tiempos, carburación, inyección, frenos, transmisión y sistema eléctrico de motos y cuatriciclos.", 
+  "Talleres de motos, casas de repuestos, servicios de mensajería y taller propio de reparación rápida.", 
+  "mecanica oficio emprender", U_EDU_SJ, 0, "Motor 2T y 4T|Sistema Eléctrico de Motos|Carburación y Afinamiento|Transmisión y Frenos");
+
+E("Electricidad Domiciliaria e Industrial", "oficio tec", "Escuelas de Capacitación Laboral de San Juan", "Certificado de Electricista / Acreditación AOP", "5 a 9 meses", 
+  "Curso práctico sobre interpretación de planos eléctricos, armado de tableros, instalaciones domiciliarias de baja tensión, motores eléctricos trifásicos y normas de seguridad.", 
+  "Obras en construcción, empresas de mantenimiento, comercios, instalaciones a domicilio particulares.", 
+  "oficio tec mecanica", U_EDU_SJ, 0, "Instalaciones Domiciliarias|Tableros Eléctricos|Motores Trifásicos|Normas de Seguridad Eléctrica");
+
+E("Plomería e Instalaciones Sanitarias Domiciliarias", "oficio emprender", "Aulas Talleres Móviles (ATM) / Capacitación Laboral", "Certificado en Instalaciones Sanitarias", "4 a 6 meses", 
+  "Formación en montaje de cañerías por termofusión, instalación de sanitarios, tanques de agua, bombas elevadoras, detección y reparación de fugas.", 
+  "Obras de edificación, empresas de mantenimiento de edificios, reparaciones a domicilio.", 
+  "oficio tec", U_EDU_SJ, 0, "Termofusión de Agua|Instalación de Cloacas|Colocación de Artefactos|Mantenimiento de Bombas");
+
+E("Gasista Matriculado (Unidades Funcionales)", "oficio tec", "Escuelas de Capacitación Laboral de San Juan", "Certificado Oficial de Gasista", "6 a 9 meses", 
+  "Curso alineado a las normas del ente regulador (Ecogas) sobre dimensionamiento de cañerías, ventilaciones, instalación de artefactos y pruebas de hermeticidad.", 
+  "Trámites de matriculación, obras particulares, reformas en hogares y comercios, servicio de habilitación de gas.", 
+  "oficio tec", U_EDU_SJ, 0, "Redes Internas de Gas|Reglamentación Ecogas|Instalación de Calefactores y Termotanques|Pruebas de Presión");
+
+E("Refrigeración, Aire Acondicionado y Climatización", "oficio tec", "Centros de Capacitación de San Juan", "Técnico en Refrigeración Domiciliaria y Comercial", "5 a 8 meses", 
+  "Montaje, carga de gas refrigerante, detección de fallas en placas electrónicas, mantenimiento preventivo y reparación de heladeras y aires acondicionados Split.", 
+  "Servicio técnico independiente, empresas de climatización, hoteles, supermercados y comercios con heladeras exhibidoras.", 
+  "oficio tec mecanica", U_EDU_SJ, 0, "Instalación de Split|Heladeras Familiares y Comerciales|Carga de Gas Refrigerante|Fallas Eléctricas en Refrigeración");
+
+E("Corte y Confección, Alta Costura y Diseño de Moda", "oficio emprender", "Escuelas de Capacitación Laboral de San Juan", "Certificado de Capacitación en Confección Textil", "6 a 9 meses", 
+  "Patronaje, trazado de moldes, moldería industrial, manejo de máquinas de coser Overlock y Recta, corte de telas, arreglos de indumentaria y diseño.", 
+  "Atelier propio, marca independiente de ropa, fábrica textil, confección de uniformes de trabajo y ropa deportiva.", 
+  "arte oficio emprender", U_EDU_SJ, 0, "Trazado de Moldes|Manejo de Máquinas Industriales|Costura y Ensamble|Alta Costura y Diseños");
+
+E("Construcción en Seco (Durlock) y Pintura de Obra", "oficio emprender", "Aulas Talleres Móviles / Escuelas de Capacitación", "Certificado en Sistemas de Construcción en Seco", "3 a 5 meses", 
+  "Estructuras metálicas perfiladas, colocación de placas de yeso, tomador de juntas, aislamiento termoacústico, cielorrasos suspendidos y pintura fina.", 
+  "Obras residenciales y comerciales, remodelación rápida de interiores, empresas constructoras.", 
+  "oficio tec", U_EDU_SJ, 0, "Perfilería de Acero|Montaje de Placas|Tomado de Juntas|Aislaciones y Pintura");
+
+E("Gastronomía, Pastelería y Cocina Internacional", "oficio emprender", "Escuelas de Capacitación Laboral de San Juan", "Certificado de Auxiliar en Gastronomía", "6 a 9 meses", 
+  "Técnicas de corte, manipulación higiénica de alimentos, elaboración de platos fríos y calientes, panadería artesanal, repostería y pastas caseras.", 
+  "Restoranes, servicios de catering, casas de empanadas y rotiserías, hoteles y emprendimiento gastronómico propio.", 
+  "oficio emprender", U_EDU_SJ, 0, "Manipulación de Alimentos|Panadería y Pastelería|Cocina Fría y Caliente|Servicio de Catering");
+
+E("Escuelas de Capacitación Laboral y Oficios (94 Centros)", "oficio emprender", "Ministerio de Educación de San Juan", "Certificación Oficial de Oficio", "3 a 9 meses", 
+  "Red provincial de 94 instituciones (Capacitación Laboral, Misiones Monotécnicas y Aulas Talleres Móviles) en los 19 departamentos. Se dicta carpintería, electricidad, gasista, corte y confección, estética, etc.", 
+  "Salida laboral rápida, emprendimiento propio, talleres mecánicos, obras en construcción y servicios a domicilio.", 
+  "oficio tec arte estetica mecanica", U_EDU_SJ, 0, "Electricidad Domiciliaria|Gasista Matriculado|Auxiliar de Robótica|Construcción en Seco|Gastronomía y Pastelería|Mecánica de Motos");
+
+E("Cursos ATP (Aprender, Trabajar y Producir)", "oficio emprender", "Ministerio de Producción, Trabajo e Innovación", "Certificado Provincial de Capacitación", "2 a 3 meses", 
+  "Cursos intensivos y gratuitos con cupos periódicos para aprender tareas técnicas de alta demanda laboral.", 
+  "Obras viales, instalación eléctrica, topografía, servicios técnicos y empresas industriales.", 
+  "oficio mineria tec mecanica", U_GOB_SJ, 0, "Auxiliar de Topografía|Plomería e Instalaciones|Soldadura Industrial|Electricidad Industrial");
+
+E("Programas de Empleo Joven y Emprendedores (Joven Podés / Generación T)", "emprender", "Dirección de Juventudes de San Juan", "Acompañamiento, Financiamiento y Mentoría", "Variable", 
+  "Programas del gobierno sanjuanino que otorgan fondos no reembolsables (capital semilla), capacitaciones y asesoramiento para proyectos emprendedores de jóvenes de 18 a 30 años.", 
+  "Creación de empresas propias, startups locales, servicios digitales, proyectos creativos y comerciales.", 
+  "eco tec oficio", U_GOB_SJ, 0, "Programa Joven Podés|Red Generación T|Capacitaciones en Marketing Digital|Clinica de Proyectos");
+
+// ==========================================
+// 6. ARTE, CULTURA Y FORMACIÓN CREATIVA
+// ==========================================
+E("Programas de Formación en el Teatro del Bicentenario", "arte", "Teatro del Bicentenario de San Juan", "Talleres y Certificaciones Artísticas", "3 a 10 meses", 
+  "Audiciones y programas de formación profesional en danza clásica y contemporánea, escenografía, caracterización, vestuario teatral, sonido e iluminación de espectáculos.", 
+  "Producciones teatrales, eventos culturales, elencos de danza, diseño de vestuario y escenografía profesional.", 
+  "arte", U_TEATRO_B, 0, "Programa de Formación en Danza|Taller de Caracterización y Maquillaje Teatral|Taller de Iluminación y Sonido Escénico");
+
+E("Talleres de Arte del Museo Franklin Rawson y Centro Conte Grand", "arte", "Ministerio de Turismo y Cultura · MPFR / Conte Grand", "Talleres Abiertos y Formación Continua", "Cursos cortos", 
+  "Espacios creativos juveniles enfocados en arte urbano, ilustración digital, gestión de eventos culturales, fotografía, producción musical independiente y muralismo.", 
+  "Industrias creativas, diseño independiente, fotografía de eventos, gestión cultural, producción audiovisual.", 
+  "arte tec", U_GOB_SJ, 0, "Ilustración Digital|Producción de Música Electrónica|Fotografía Urbana|Muralismo y Arte Público");
+
+E("Escuela de Música de la UNSJ (Departamento de Música)", "arte uni", "UNSJ · Escuela de Música (Auditorio Juan Victoria)", "Preuniversitario e Intérprete Musical", "2 a 5 años", 
+  "Formación instrumental intensiva en piano, violín, chelo, guitarra, percusión, vientos y canto. Incluye la integración de orquestas juveniles.", 
+  "Orquesta Sinfónica, bandas independientes, enseñanza de instrumentos, producción musical.", 
+  "arte", U_UNSJ, 0, "Preparatorio de Música|Tecnicatura en Interpretación Musical|Profesorado de Instrumento");
+
+// ==========================================
+// 7. DEPORTE, ALTO RENDIMIENTO Y BECAS
+// ==========================================
+E("Becas y Programas de la Secretaría de Deportes", "deporte", "Secretaría de Estado de Deporte de San Juan", "Becas de Alto Rendimiento y Formación", "Anual", 
+  "Programas de apoyo a deportistas de representación provincial y nacional, capacitación de Líderes Deportivos Comunitarios y escuelas formativas de alto rendimiento.", 
+  "Deporte federado, gestión de clubes deportivos, arbitraje, entrenamiento técnico comunal.", 
+  "deporte salud", U_DEPORTES, 0, "Programa de Alto Rendimiento|Capacitación en Liderazgo Deportivo|Escuelas de Iniciación Deportiva");
+
+E("Tecnicatura en Preparación Física y Rendimiento Deportivo", "deporte tec", "Universidad de Congreso / UCCuyo", "Técnico/a Universitario/a", "2 años", 
+  "Formación técnica universitaria enfocada en la biomecánica, nutrición deportiva, evaluación del rendimiento de atletas y diseño de rutinas de entrenamiento.", 
+  "Preparador físico en equipos de fútbol, hockey, ciclismo y básquet, gimnasios, centros de alto rendimiento.", 
+  "deporte salud", U_UCONGRESO, 1, "Tecnicatura Universitaria en Preparación Física");
+
+// ==========================================
+// LÓGICA DE LA APLICACIÓN (JS VANILLA)
+// ==========================================
+const $ = s => document.querySelector(s);
+
+// DESGLOSE: cada carrera de universidad pasa a ser su propia tarjeta
+const _n = t => t.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+const KW = {
+  salud: /enfermer|medicin|kinesi|nutric|terapeut|terapia|obstetric|dental|podolog|clinic|bioquim|farmac|radiolog|bioimagen|instrumentacion|psicolog|bioingenier|biologia/,
+  tec: /ingenier|sistemas de informacion|programacion|informatica|datos|ciberseg|software|computa|electr|tecnologia$|profesorado de tecnologia/,
+  arte: /arte|musica|teatro|diseno|arquitect|interprete|animacion|indumentaria|musical/,
+  deporte: /educacion fisica|preparacion fisica|deport/,
+  mineria: /minas|minera|minerales|metalurg|geolog|geofis|astronom|exploracion|maquinaria|agrimensura|fisica$/,
+  agro: /agron|agro|alimento|enolog|sommelier|ambient|hidric|biologia|gastronom/,
+  social: /educativ|educacion|letras|historia|filosofia|geografia|comunicacion|sociolog|social|politic|psicopedag|recursos humanos|turismo|ingles|matematica|profesorado|seguridad|relaciones|inclusiva|quimica/,
+  eco: /contador|administr|econom|comercio|comercializ|marketing|logistica|abogac|notari|martillero|juridic|derecho|hoteleria|escribania|venta|contable/,
+  mecanica: /mecanic|electromecanic|mantenimiento|industrial/
+};
+const inferAreas = (name, fallback) => {
+  const t = _n(name);
+  const r = Object.keys(KW).filter(k => KW[k].test(t));
+  return r.length ? r : fallback;
+};
+const flat = [];
+D.forEach(o => {
+  if (o.v.includes("uni") && o.l.length > 1) {
+    o.l.forEach(c => {
+      if (c.includes("(Valles Sanjuaninos)")) return;
+      flat.push({ ...o, n: c, l: [], a: inferAreas(c, o.a), grp: o.n });
+    });
+  } else flat.push(o);
+});
+D.splice(0, D.length, ...flat);
+
+D.forEach((o, i) => o.id = i);
+
+let via = null;
+let areas = new Set();
+let g = null;
+let nw = false;
+let view = "exp";
+let favs = [];
+
+// Cargar mochila de localStorage
+try {
+  favs = JSON.parse(localStorage.getItem("sj-mochila-2027") || "[]");
+} catch(e) {
+  favs = [];
+}
+
+const saveFavs = () => {
+  try {
+    localStorage.setItem("sj-mochila-2027", JSON.stringify(favs));
+  } catch(e) {}
+};
+
+const norm = s => s.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+
+const getCol = o => {
+  const matchVia = VIAS.find(v => o.v.includes(v[0]));
+  return matchVia ? matchVia[4] : "var(--sun)";
+};
+
+function matchFilter(o, skipVia) {
+  const q = norm($("#q").value.trim());
+  const matchFav = (view !== "fav") || favs.includes(o.id);
+  const matchV = skipVia || !via || o.v.includes(via);
+  const matchG = (g === null) || (o.g === g);
+  const matchNw = !nw || o.nw;
+  const matchA = (!areas.size) || o.a.some(a => areas.has(a));
+  
+  const searchText = norm([o.n, o.i, o.x, o.c, o.t, o.grp || "", o.l.join(" ")].join(" "));
+  const matchQ = !q || q.split(/\s+/).every(w => searchText.includes(w));
+
+  return matchFav && matchV && matchG && matchNw && matchA && matchQ;
+}
+
+function buildFilters() {
+  // Render de chips de áreas
+  $("#areas").innerHTML = Object.entries(AREAS).map(([k, t]) => 
+    `<button class="chip" data-a="${k}" aria-pressed="${areas.has(k)}">${t}</button>`
+  ).join("");
+
+  // Render de extras (Gestión / Novedades)
+  $("#extra").innerHTML = `
+    <button class="chip" data-nw="1" aria-pressed="${nw}">✨ Novedades 2027</button>
+    <div class="seg">
+      <button data-g="0" aria-pressed="${g===0}">🏛️ Pública (Gratuita)</button>
+      <button data-g="1" aria-pressed="${g===1}">💳 Privada</button>
+    </div>
+  `;
+}
+
+function render() {
+  // Render Vías con contadores
+  $("#vias").innerHTML = VIAS.map(v => {
+    const count = D.filter(o => matchFilter(o, true) && o.v.includes(v[0])).length;
+    return `
+      <button class="via" data-v="${v[0]}" style="background:${v[4]}" aria-pressed="${via === v[0]}">
+        <span class="e">${v[1]}</span>
+        <span>
+          <b>${v[2]}</b>
+          <small>${v[3]}</small>
+        </span>
+        <span class="n">${count}</span>
+      </button>
+    `;
+  }).join("");
+
+  const filtered = D.filter(o => matchFilter(o));
+
+  // Título y Contador
+  $("#count").textContent = (view === "fav" ? "🎒 Mi Mochila" : "Resultados") + ` (${filtered.length})`;
+  $("#fc").textContent = favs.length;
+
+  // Lista de Cards
+  if (filtered.length === 0) {
+    $("#list").innerHTML = `
+      <div class="empty">
+        <h3>${view === "fav" ? "Tu mochila está vacía 🎒" : "No encontramos opciones con estos filtros 🔍"}</h3>
+        <p>${view === "fav" ? "Tocá el corazón 🤍 en las opciones que te interesen para guardarlas acá y compararlas." : "Probá sacando algún filtro o buscando con otra palabra clave."}</p>
+      </div>
+    `;
+  } else {
+    $("#list").innerHTML = filtered.map(o => {
+      const isFav = favs.includes(o.id);
+      return `
+        <div class="card-item">
+          <button class="card" style="--c:${getCol(o)}" data-id="${o.id}">
+            <h3>${o.n}</h3>
+            <div class="inst">${o.i}</div>
+            <div class="desc-preview">${o.x}</div>
+            <div class="pills">
+              <span class="pill">${o.d}</span>
+              <span class="pill ${o.g ? 'priv' : 'pub'}">${o.g ? 'Gestión Privada' : 'Pública / Gratuita'}</span>
+              ${o.nw ? '<span class="pill new">✨ Nuevo 2027</span>' : ''}
+            </div>
+          </button>
+          <button class="fv" data-f="${o.id}" aria-label="${isFav ? 'Quitar de la mochila' : 'Guardar en la mochila'}">
+            ${isFav ? '❤️' : '🤍'}
+          </button>
+        </div>
+      `;
+    }).join("");
+
+    if (view === "fav" && filtered.length > 0) {
+      const shareText = encodeURIComponent(
+        "🚀 Mi Mochila de opciones para el futuro en San Juan:\n\n" +
+        filtered.map(o => `• ${o.n} (${o.i})\n  Más info: ${o.u}`).join("\n\n")
+      );
+      $("#list").insertAdjacentHTML("beforeend", `
+        <a class="share-btn" target="_blank" rel="noopener" href="https://wa.me/?text=${shareText}">
+          📲 Compartir mi Mochila por WhatsApp
+        </a>
+      `);
+    }
+  }
+}
+
+function openModal(id) {
+  const o = D[id];
+  const isFav = favs.includes(id);
+  const p = $("#pg");
+
+  p.innerHTML = `
+    <div class="ph" style="--c:${getCol(o)}">
+      <div class="wrap">
+        <button class="back" data-back="1">← Volver al listado</button>
+        <div class="pills" style="margin-bottom:8px">
+          <span class="pill ${o.g ? 'priv' : 'pub'}" style="background:#fff">${o.g ? 'Gestión Privada' : 'Pública / Gratuita'}</span>
+          ${o.nw ? '<span class="pill new">✨ Novedad 2027</span>' : ''}
+        </div>
+        <h2>${o.n}</h2>
+        <div class="subinst">${o.i}</div>
+      </div>
+    </div>
+    
+    <div class="wrap pb">
+      <div class="f-box">
+        <h4>📜 Titulación o Certificación</h4>
+        <p>${o.t}</p>
+      </div>
+
+      <div class="f-box">
+        <h4>⏱️ Duración estimada</h4>
+        <p>${o.d}</p>
+      </div>
+
+      <div class="f-box">
+        <h4>💡 ¿De qué se trata?</h4>
+        <p>${o.x}</p>
+      </div>
+
+      <div class="f-box">
+        <h4>💼 Campo laboral y salidas de trabajo</h4>
+        <p>${o.c}</p>
+      </div>
+
+      ${o.l.length ? `
+        <div class="f-box">
+          <h4>📚 Carreras, orientación o módulos incluidos</h4>
+          <div class="ul">
+            ${o.l.map(x => `<span>${x}</span>`).join("")}
+          </div>
+        </div>
+      ` : ''}
+    </div>
+
+    <div class="cta">
+      <a href="${o.u}" target="_blank" rel="noopener">🌐 Sitio Web Oficial</a>
+      <button data-f="${id}" id="sv">${isFav ? '❤️ En mi mochila' : '🤍 Guardar'}</button>
+    </div>
+  `;
+
+  p.classList.add("on");
+  p.scrollTop = 0;
+  history.pushState({ modalOpen: true }, "");
+}
+
+function closeModal() {
+  const p = $("#pg");
+  if (p.classList.contains("on")) {
+    p.classList.remove("on");
+  }
+}
+
+// MANEJO DE EVENTOS DE CLIC
+document.addEventListener("click", e => {
+  const btn = e.target.closest("button");
+  if (!btn) return;
+
+  if (btn.dataset.back) {
+    history.back();
+    return;
+  }
+
+  // Toggle Favoritos / Mochila
+  if (btn.dataset.f !== undefined) {
+    const id = +btn.dataset.f;
+    if (favs.includes(id)) {
+      favs = favs.filter(x => x !== id);
+    } else {
+      favs.push(id);
+    }
+    saveFavs();
+    render();
+
+    // Actualizar botón de modal si está abierto
+    const modalBtn = $("#sv");
+    if (modalBtn && $("#pg").classList.contains("on")) {
+      modalBtn.textContent = favs.includes(id) ? "❤️ En mi mochila" : "🤍 Guardar";
+    }
+    return;
+  }
+
+  // Abrir Modal de Ficha
+  if (btn.dataset.id !== undefined) {
+    return openModal(+btn.dataset.id);
+  }
+
+  // Filtro por Vía
+  if (btn.dataset.v) {
+    via = (via === btn.dataset.v) ? null : btn.dataset.v;
+  }
+  // Filtro por Área
+  else if (btn.dataset.a) {
+    const a = btn.dataset.a;
+    if (areas.has(a)) areas.delete(a);
+    else areas.add(a);
+  }
+  // Filtro por Gestión (Pública / Privada)
+  else if (btn.dataset.g !== undefined) {
+    const k = +btn.dataset.g;
+    g = (g === k) ? null : k;
+  }
+  // Filtro por Novedades
+  else if (btn.dataset.nw) {
+    nw = !nw;
+  }
+  // Limpiar Filtros
+  else if (btn.id === "clr") {
+    via = null;
+    g = null;
+    nw = false;
+    areas.clear();
+    $("#q").value = "";
+    if (view === "fav") view = "exp";
+    $("#bag").style.background = "";
+  }
+  // Toggle Mochila
+  else if (btn.id === "bag") {
+    view = (view === "fav") ? "exp" : "fav";
+    $("#bag").style.background = (view === "fav") ? "#fff" : "var(--sun)";
+    window.scrollTo({ top: $("#count").offsetTop - 80, behavior: "smooth" });
+  } 
+  else return;
+
+  buildFilters();
+  render();
+});
+
+window.addEventListener("popstate", closeModal);
+
+$("#q").addEventListener("input", render);
+
+// INICIALIZACIÓN
+buildFilters();
+render();
+</script>
+</body>
+</html>
